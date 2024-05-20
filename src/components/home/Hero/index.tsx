@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import styles from '@/components/home/Hero/Hero.module.css';
+import styles from './Hero.module.sass';
 
 interface HeroProps {}
 
