@@ -3,6 +3,8 @@ import { Roboto } from 'next/font/google';
 import { Header } from '@/components/shared/Header';
 import { Footer } from '@/components/shared/Footer';
 import '@/sass/global.sass';
+import { Hero } from '@/components/home/Hero';
+import { Description } from '@/components/home/Description';
 
 const roboto = Roboto({
   weight: ['100', '300', '500', '700'],
