@@ -14,9 +14,9 @@ export const getProducts = async (): Promise<ProductType[]> => {
   return products.map((product: any) => ({
     id: product.id,
     title: product.title,
-    description: product.description,
-    price: product.price,
-    image: product.image,
+    description: product.body_html,
+    price: parseFloat(product.variants[0].price),
+    image: product.image.src,
     quantity: product.quantity,
     handle: product.handle,
     tags: product.tags,
@@ -33,11 +33,11 @@ export const getProduct = async (id: string): Promise<ProductType> => {
   const { product } = await response.json();
 
   return {
-    id: product.id,
+    id: product.product_id,
     title: product.title,
-    description: product.description,
-    price: product.price,
-    image: product.image,
+    description: product.body_html,
+    price: parseFloat(product.variants[0].price),
+    image: product.image.src,
     quantity: product.quantity,
     handle: product.handle,
     tags: product.tags,

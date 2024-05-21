@@ -33,11 +33,11 @@ export const getCollectionsProducts = async (id: string) => {
     });
     const { products } = await response.json();
     return products.map((product: any) => ({
-      id: product.id,
+      id: product.product_id,
       title: product.title,
-      description: product.description,
-      price: product.price,
-      image: product.image,
+      description: product.body_html,
+      price: parseFloat(product.variants[0].price),
+      image: product.image.src,
       quantity: product.quantity,
       handle: product.handle,
       tags: product.tags,
