@@ -13,3 +13,10 @@ export type ProductType = {
   handle: string;
   tags: string;
 };
+
+export type CartItem = {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+};
