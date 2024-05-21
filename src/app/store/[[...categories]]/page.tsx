@@ -1,3 +1,7 @@
+import { ProductsWrapper } from '@/components/store/ProductsWrapper';
+import { getCollectionsProducts } from '@/services/shopify/collections';
+import { getProducts } from '@/services/shopify/products';
+
 interface CategoryProps {
   params: {
     categories: string[];
@@ -5,11 +9,17 @@ interface CategoryProps {
   searchParams?: any;
 }
 
-export default function category(props: CategoryProps) {
-  const { categories } = props.params;
-  return (
-    <main>
-      <h1>Categoría dinámica: {categories} </h1>
-    </main>
-  );
+export default async function category({
+  params,
+  searchParams,
+}: CategoryProps) {
+  const collectionId = searchParams.id;
+  let products;
+  if (collectionId) {
+    products = await getCollectionsProducts(collectionId);
+  } else {
+    products = await getProducts();
+  }
+
+  return <ProductsWrapper products={products} />;
 }

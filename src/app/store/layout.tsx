@@ -1,9 +1,26 @@
+import { getCollections } from '@/services/shopify/collections';
+import Link from 'next/link';
 import React from 'react';
+import styles from './StoreLayout.module.sass';
 
-function Layout({ children }: { children: React.ReactNode }) {
+async function Layout({ children }: { children: React.ReactNode }) {
+  const collections = await getCollections();
   return (
-    <main>
-      <nav>Navegación de las categorías</nav>
+    <main className={styles.StoreLayout}>
+      <h1>Explore</h1>
+      <nav>
+        <ul className={styles.StoreLayout__list}>
+          {collections.map(collection => (
+            <Link
+              key={collection.id}
+              href={'/store/' + collection.handle + '?id=' + collection.id}
+              className={styles.StoreLayout__chip}
+            >
+              {collection.title}
+            </Link>
+          ))}
+        </ul>
+      </nav>
       {children}
     </main>
   );

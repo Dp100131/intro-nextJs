@@ -1,21 +1,8 @@
 import { FunctionComponent } from 'react';
 import styles from './MainProducts.module.sass';
 import Image from 'next/image';
+import { getProducts } from '@/services/shopify/products';
 
-const getProducts = async () => {
-  const response = await fetch(
-    `${process.env.SHOPIFY_HOST_NAME}/admin/api/2023-10/products.json`,
-    {
-      headers: new Headers({
-        'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || '',
-      }),
-    }
-  );
-
-  const { products } = await response.json();
-
-  return products;
-};
 interface MainProductsProps {}
 
 export const MainProducts: FunctionComponent<MainProductsProps> = async () => {
