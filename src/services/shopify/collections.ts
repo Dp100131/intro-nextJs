@@ -32,7 +32,39 @@ export const getCollectionsProducts = async (id: string) => {
       }),
     });
     const { products } = await response.json();
-    return products;
+    return products.map((product: any) => ({
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      quantity: product.quantity,
+      handle: product.handle,
+      tags: product.tags,
+    }));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getCollectionsMainProducts = async () => {
+  try {
+    const response = await fetch(shopifyUrls.collections.mainProducts, {
+      headers: new Headers({
+        'X-Shopify-Access-Token': env.SHOPIFY_TOKEN,
+      }),
+    });
+    const { products } = await response.json();
+    return products.map((product: any) => ({
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      quantity: product.quantity,
+      handle: product.handle,
+      tags: product.tags,
+    }));
   } catch (error) {
     console.error(error);
   }
