@@ -13,6 +13,7 @@ export const getProducts = async (): Promise<ProductType[]> => {
 
   return products.map((product: any) => ({
     id: product.id,
+    gql_id: product.variants[0].admin_graphql_api_id,
     title: product.title,
     description: product.body_html,
     price: parseFloat(product.variants[0].price),
@@ -33,12 +34,13 @@ export const getProduct = async (id: string): Promise<ProductType> => {
   const { product } = await response.json();
 
   return {
-    id: product.product_id,
+    id: product.id,
+    gql_id: product.variants[0].admin_graphql_api_id,
     title: product.title,
     description: product.body_html,
     price: parseFloat(product.variants[0].price),
     image: product.image.src,
-    quantity: product.quantity,
+    quantity: product.variants[0].inventory_quantity,
     handle: product.handle,
     tags: product.tags,
   };

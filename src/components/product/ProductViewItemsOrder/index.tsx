@@ -2,18 +2,31 @@
 import { SyntheticEvent, useState } from 'react';
 import { FaCartShopping } from 'react-icons/fa6';
 import styles from './ProductViewItemsOrder.module.sass';
+import { useShoppingCart } from '@/hooks/useShoppingCart';
+import { ProductType } from '../../../../types';
 
 interface ProductViewItemsOrderProps {
   maxQuantity: number;
+  product: ProductType;
 }
 
 export const ProductViewItemsOrder = ({
   maxQuantity,
+  product,
 }: ProductViewItemsOrderProps) => {
   const [counter, setCounter] = useState(1);
+  const { addToCart } = useShoppingCart();
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleAddToCart = (event: SyntheticEvent) => {
     event.preventDefault();
+    addToCart({
+      title: product.title,
+      price: product.price,
+      quantity: counter,
+      id: product.id,
+      image: product.image,
+      merchandiseId: product.gql_id,
+    });
   };
 
   const handleSubtract = (event: SyntheticEvent) => {
@@ -36,7 +49,7 @@ export const ProductViewItemsOrder = ({
         <button onClick={handleAdd}>+</button>
       </div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleAddToCart}
         className={styles.ProductViewItemsOrder__form}
       >
         <button className={styles.ProductViewItemsOrder__submit} type="submit">

@@ -32,18 +32,10 @@ export const getCollectionsProducts = async (id: string) => {
       }),
     });
     const { products } = await response.json();
-    return products.map((product: any) => ({
-      id: product.product_id,
-      title: product.title,
-      description: product.body_html,
-      price: parseFloat(product.variants[0].price),
-      image: product.image.src,
-      quantity: product.quantity,
-      handle: product.handle,
-      tags: product.tags,
-    }));
+    return products;
   } catch (error) {
     console.error(error);
+    return [];
   }
 };
 
@@ -55,16 +47,7 @@ export const getCollectionsMainProducts = async () => {
       }),
     });
     const { products } = await response.json();
-    return products.map((product: any) => ({
-      id: product.id,
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      image: product.image,
-      quantity: product.quantity,
-      handle: product.handle,
-      tags: product.tags,
-    }));
+    return products;
   } catch (error) {
     console.error(error);
   }

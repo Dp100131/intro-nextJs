@@ -2,9 +2,17 @@ import { FunctionComponent } from 'react';
 import Link from 'next/link';
 import styles from '@/components/shared/Header/Header.module.sass';
 import { validateAccessToken } from '@/utils/auth/validateAccessToken';
-import { ShoppingCart } from '../ShoppingCart';
+import dynamic from 'next/dynamic';
 
 interface HeaderProps {}
+
+const NoSSRShoppingCart = dynamic(
+  () =>
+    import('@/components/shared/ShoppingCart').then(mod => mod.ShoppingCart),
+  {
+    ssr: false,
+  }
+);
 
 export const Header: FunctionComponent<HeaderProps> = async () => {
   const customer = await validateAccessToken();
@@ -27,7 +35,7 @@ export const Header: FunctionComponent<HeaderProps> = async () => {
         ) : (
           <Link href="/login">Login</Link>
         )}
-        <ShoppingCart />
+        <NoSSRShoppingCart />
       </div>
     </header>
   );

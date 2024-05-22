@@ -12,6 +12,7 @@ export type ProductType = {
   quantity: number;
   handle: string;
   tags: string;
+  gql_id: string;
 };
 
 export type CartItem = {
@@ -19,4 +20,6 @@ export type CartItem = {
   title: string;
   price: number;
   quantity: number;
+  image: string;
+  merchandiseId: string;
 };

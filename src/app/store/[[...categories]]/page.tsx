@@ -9,10 +9,7 @@ interface CategoryProps {
   searchParams?: any;
 }
 
-export default async function category({
-  params,
-  searchParams,
-}: CategoryProps) {
+export default async function category({ searchParams }: CategoryProps) {
   const collectionId = searchParams.id;
   let products;
   if (collectionId) {
